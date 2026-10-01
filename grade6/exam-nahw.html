@@ -1,0 +1,3026 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>اختبارات نحوية شاملة - الصف السادس الابتدائي</title>
+    <!-- استدعاء خط احترافي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e1b8f;      
+            --primary-light: #3b36d1; 
+            --secondary: #2c29a8;    
+            --success: #10b981;      
+            --danger: #ef4444;       
+            --warning: #f59e0b;      
+            --dark: #1e293b;         
+            --light: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #eef0ff;
+            background-image: radial-gradient(#c9cbf3 1.5px, transparent 1.5px);
+            background-size: 25px 25px;
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .hidden { display: none !important; }
+        
+        /* --- الهيدر الرئيسي --- */
+        .header-main {
+            background: linear-gradient(135deg, #0b0a4a, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px 20px 90px 20px; 
+            text-align: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title-line1 {
+            font-size: clamp(1.1rem, 4vw, 1.5rem); 
+            font-weight: 700;
+            color: #fff4d6;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title-line2 {
+            font-size: clamp(1.4rem, 5.5vw, 2.6rem); 
+            font-weight: 900;
+            background: linear-gradient(to right, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .header-main h2 { font-size: clamp(1rem, 3vw, 1.3rem); font-weight: 600; color: #f5f6ff; margin-bottom: 8px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);}
+        .header-main p { font-size: clamp(0.9rem, 2.5vw, 1.1rem); font-weight: 600; background: rgba(0,0,0,0.3); display: inline-block; padding: 6px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+
+        .header-wave {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+        }
+
+        /* --- الأزرار --- */
+        .btn {
+            background: linear-gradient(to bottom, var(--primary-light), var(--primary));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom: 3px solid rgba(0,0,0,0.3);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
+        .btn:active { transform: translateY(2px); border-bottom: 0px; margin-top: 3px; }
+        .btn-correct { filter: brightness(1.2); pointer-events: none; border-bottom-width: 0; transform: translateY(2px);}
+        .btn-wrong { filter: brightness(0.8); pointer-events: none; border-bottom-width: 0; transform: translateY(2px);}
+
+        /* --- الشاشة الرئيسية --- */
+        #home-screen {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+            padding-bottom: 80px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-card::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .menu-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-color: rgba(245, 184, 46, 0.45); }
+        .menu-card:hover::before { opacity: 1; }
+        
+        .menu-card .icon-container {
+            width: 80px; height: 80px;
+            margin: 0 auto 15px auto;
+            background: linear-gradient(135deg, #fff4d6, #fde68a);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 3px 6px rgba(255,255,255,0.8), 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .menu-card .icon-container svg {
+            width: 40px; height: 40px; stroke: #1e1b8f; fill: none;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .menu-card:hover .icon-container { transform: scale(1.1) rotate(10deg); }
+        .menu-card h3 { font-size: 1.4rem; color: var(--dark); font-weight: 800; margin-bottom: 8px;}
+        .menu-card p { font-size: 1rem; color: #64748b; font-weight: 600;}
+
+        /* --- شاشة اللعب --- */
+        #game-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-nav {
+            background: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+        }
+        .back-btn { background: #e2e8f0; color: var(--dark); border-bottom: 3px solid #cbd5e1; padding: 8px 15px;}
+        #game-progress { background: #3b36d1; color: white; padding: 6px 15px; border-radius: 20px;}
+        
+        .game-container {
+            flex: 1;
+            padding: 0 20px 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .question-box {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-weight: 800;
+            color: #1e1b8f;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            border-right: 8px solid #f5b82e;
+            line-height: 1.6;
+        }
+
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+
+        /* MCQ Style */
+        .options-grid { display: flex; flex-direction: column; gap: 15px; }
+        .options-grid .btn { padding: 18px; font-size: clamp(1.1rem, 3.5vw, 1.4rem); text-align: right; justify-content: flex-start; border-radius: 12px;}
+
+        /* True/False Style */
+        .tf-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+
+        /* Bubbles Style */
+        .bubbles-area {
+            position: relative; height: 400px;
+            background: linear-gradient(to bottom, #0b0a4a, #1e1b8f);
+            border-radius: 16px; overflow: hidden;
+            border: 4px solid #3b36d1; margin-top: 10px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(224,231,255,0.9));
+            color: #1e1b8f;
+            border: 2px solid #ffffff;
+            padding: 10px 5px;
+            border-radius: 30px;
+            font-weight: 800; font-size: clamp(0.85rem, 2vw, 1.05rem);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2), inset -4px -4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            width: 22%;
+            transition: transform 0.2s, background 0.2s;
+            z-index: 5;
+        }
+        .bubble:hover { transform: scale(1.05); }
+        .bubble::after {
+            content: ''; position: absolute; top: 10%; left: 15%;
+            width: 20%; height: 20%; background: rgba(255,255,255,0.8);
+            border-radius: 50%; filter: blur(2px);
+        }
+
+        /* Shooting Style */
+        .shooting-area {
+            position: relative; height: 400px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect fill="%23eef0ff" width="100%" height="100%"/><circle fill="%23dfe1ff" cx="20%" cy="30%" r="50"/><circle fill="%23dfe1ff" cx="80%" cy="60%" r="70"/><circle fill="%23dfe1ff" cx="50%" cy="80%" r="40"/></svg>') no-repeat center center;
+            background-size: cover; border-radius: 16px; overflow: hidden;
+            border: 4px solid #3b36d1; margin-top: 10px; box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
+        .target-bird {
+            position: absolute; background: white; color: var(--dark);
+            padding: 10px 20px; border-radius: 30px; font-weight: 800; font-size: clamp(0.95rem, 3vw, 1.15rem);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15); cursor: crosshair;
+            border: 3px solid var(--warning); white-space: nowrap; transition: background 0.2s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .target-bird:hover { transform: scale(1.05); background: #f5f6ff; }
+
+        /* Genius Challenge Style */
+        .genius-wrap {
+            background: linear-gradient(135deg, #0b0a4a, #1e1b8f, #3b36d1);
+            border-radius: 16px; padding: 20px; margin-top: 10px;
+            border: 4px solid #fbbf24; box-shadow: inset 0 0 25px rgba(0,0,0,0.4), 0 10px 20px rgba(30,27,143,0.35);
+        }
+        .genius-timer-track {
+            width: 100%; height: 14px; background: rgba(0,0,0,0.35);
+            border-radius: 10px; overflow: hidden; margin-bottom: 18px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .genius-timer-bar {
+            height: 100%; width: 100%;
+            background: linear-gradient(to right, #fbbf24, #3b36d1, #ef4444);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+        .genius-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 600px) { .genius-options { grid-template-columns: 1fr; } }
+        .genius-options .btn {
+            padding: 16px 10px; font-size: clamp(1rem, 3vw, 1.25rem);
+            background: linear-gradient(to bottom, #4f46e5, #1e1b8f);
+            border-bottom: 3px solid #0b0a4a; border-radius: 14px; min-height: 70px;
+        }
+        .genius-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(251, 191, 36, 0.15); color: #fbbf24;
+            font-weight: 800; padding: 6px 16px; border-radius: 20px;
+            border: 1px solid rgba(253,224,71,0.4); margin-bottom: 12px; font-size: 0.95rem;
+        }
+
+        /* Result Share (WhatsApp) */
+        .share-box {
+            margin-top: 25px; background: #f5f6ff; border: 2px solid #fde68a;
+            border-radius: 16px; padding: 20px; text-align: center;
+        }
+        .share-box h4 { color: #1e1b8f; font-size: 1.2rem; margin-bottom: 12px; font-weight: 800;}
+        .share-name-input {
+            width: 100%; max-width: 320px; padding: 12px 16px; border-radius: 12px;
+            border: 2px solid #a5a8f0; font-size: 1.05rem; text-align: center;
+            font-family: 'Cairo', sans-serif; font-weight: 700; margin-bottom: 12px;
+            color: var(--dark);
+        }
+        .share-name-input:focus { outline: none; border-color: #3b36d1; }
+        .btn-share {
+            background: linear-gradient(to bottom, #25d366, #1da851);
+            border-bottom-color: #128c3e; display: inline-flex; gap: 10px;
+        }
+        .share-warning { color: var(--danger); font-weight: 700; font-size: 0.9rem; margin-top: 8px; display: none; }
+
+        /* Modal Overlay */
+        .overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .overlay.active { opacity: 1; pointer-events: all; }
+        .modal {
+            background: white; padding: 40px; border-radius: 25px;
+            text-align: center; max-width: 90%; width: 400px;
+            transform: scale(0.7) translateY(50px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        .overlay.active .modal { transform: scale(1) translateY(0); }
+        .modal-icon { display: flex; justify-content: center; margin-bottom: 20px; }
+
+        /* Summary Errors Scrolling */
+        .errors-list::-webkit-scrollbar { width: 8px; }
+        .errors-list::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; }
+        .errors-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+        .errors-list::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* الفوتر (Footer) */
+        .footer-main {
+            background: var(--dark); color: #cbd5e1;
+            text-align: center; padding: 25px 20px; margin-top: auto;
+            border-top: 4px solid var(--primary);
+        }
+        .footer-main p { margin: 5px 0; font-size: 1.1rem; font-weight: 600;}
+        .footer-main .designer { font-size: 1rem; color: #94a3b8; font-weight: 400;}
+
+        /* WhatsApp */
+        .whatsapp-float {
+            position: fixed; bottom: 25px; left: 25px;
+            background: #25d366; color: white;
+            width: 65px; height: 65px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; box-shadow: 0 8px 15px rgba(37, 211, 102, 0.4);
+            z-index: 100; transition: all 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.15) rotate(-5deg); box-shadow: 0 12px 20px rgba(37, 211, 102, 0.6); }
+        .whatsapp-float svg { width: 35px; height: 35px; fill: currentColor; }
+
+        /* Confetti effect */
+        .confetti {
+            position: fixed; top: -10px; width: 12px; height: 12px; z-index: 9999;
+            animation: fall linear forwards; border-radius: 3px;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+        .teacher-logo { width: 220px; height: 220px; border-radius: 30px; border: 4px solid var(--warning); box-shadow: 0 8px 16px rgba(0,0,0,0.4); background-color: white; object-fit: cover; object-position: top; flex-shrink: 0; }
+        @media (max-width: 600px) { .teacher-logo { width: 150px; height: 150px; } }
+        .top-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+        .nav-pill { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(251,191,36,0.6); padding: 6px 16px; border-radius: 30px; transition: background 0.2s; }
+        .nav-pill:hover { background: rgba(251,191,36,0.3); }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر مع اللوجو -->
+    <header class="header-main" id="main-header">
+        <div class="header-content">
+            <div class="top-links"><a href="index.html" class="nav-pill">&#8594; دروس الصف السادس</a><a href="../index.html" class="nav-pill">الصفحة الرئيسية</a></div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                <!-- اللوجو (على اليمين) -->
+                <img src="../assets/logo.jpg" alt="شعار أ / أحمد السنتريسي" class="teacher-logo">
+                
+                <!-- النصوص -->
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <h1 class="title-line1">
+                        درس 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                        لعبة
+                    </h1>
+                    <h1 class="title-line2">مع أ / أحمد السنتريسي</h1>
+                    <h2>الصَّفُّ السَّادِسُ الِابْتِدَائِيُّ - الفصل الدراسي الأول - القواعد النحوية للوحدات الثلاث</h2>
+                    <p style="margin-top: 10px;">✍️ اختبارات نحوية شاملة: 5 ألعاب × 40 سؤالًا</p>
+                </div>
+            </div>
+        </div>
+        <!-- تموجات زخرفية -->
+        <svg class="header-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#eef0ff" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,170.7C960,160,1056,192,1152,208C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+    </header>
+
+    <!-- الشاشة الرئيسية -->
+    <div id="home-screen">
+        <div class="grid-menu" id="menu-grid">
+            <!-- سيتم حقن البطاقات هنا برمجياً -->
+        </div>
+    </div>
+
+    <!-- شاشة اللعب -->
+    <div id="game-screen" class="hidden">
+        <div class="game-nav">
+            <button class="btn back-btn" onclick="returnToMenu()">
+                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                رجوع
+            </button>
+            <strong id="game-title">عنوان اللعبة</strong>
+            <span id="game-progress">1 / 25</span>
+        </div>
+        <div class="game-container" id="game-container">
+            <!-- سيتم حقن الأسئلة هنا برمجياً -->
+        </div>
+    </div>
+
+    <!-- نافذة الملاحظات السريعة -->
+    <div class="overlay" id="feedback-modal">
+        <div class="modal">
+            <div class="modal-icon" id="feedback-icon"></div>
+            <h2 id="feedback-title" style="font-size: 2.5rem; font-weight: 900;">إجابة صحيحة!</h2>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer-main" id="main-footer">
+        <p>جميع الحقوق محفوظة &copy; | دروس وألعاب تعليمية</p>
+        <p class="designer">أ / أحمد السنتريسي — للتواصل واتساب: 01033151639</p>
+    </footer>
+
+    <!-- زر الواتساب -->
+    <a href="https://wa.me/201033151639" class="whatsapp-float" target="_blank" title="تواصل معنا">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.656.843 5.12 2.26 7.15L.626 24l5.01-1.61c1.983 1.25 4.27 1.91 6.395 1.91 6.646 0 12.03-5.385 12.03-12.031S18.677 0 12.031 0zm6.544 17.202c-.273.766-1.58 1.464-2.185 1.503-.56.035-1.28.23-4.085-.86-3.39-1.32-5.59-4.78-5.736-4.97-.145-.19-1.37-1.82-1.37-3.475 0-1.655.857-2.47 1.164-2.8.307-.33.67-.413.89-.413.22 0 .44 0 .633.01.205.01.482-.08.736.53.264.634.904 2.203.984 2.366.08.163.133.353.033.553-.1.2-.153.326-.307.506-.154.18-.32.38-.453.506-.153.153-.314.316-.134.626.18.31.8 1.32 1.71 2.13.176.157.363.31.558.45 1.05.76 1.83 1.05 2.13 1.18.3.13.474.11.652-.09.18-.205.766-.893.97-1.2.204-.307.41-.256.69-.153.28.103 1.77.836 2.074.99.304.153.506.23.582.356.076.126.076.73-.197 1.496z"/>
+        </svg>
+    </a>
+
+<script>
+    const LESSON_NAME = "الصف السادس الابتدائي - اختبارات نحوية شاملة";
+    const allGamesData = [
+ {
+  "id": "mcq",
+  "title": "اختيار من متعدد",
+  "type": "mcq",
+  "desc": "40 سؤالًا نحويًّا شاملًا على قواعد الفصل الدراسي الأول",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><polygon points=\"11 5 6 9 2 9 2 15 6 15 11 19 11 5\"></polygon><path d=\"M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07\"></path></svg>",
+  "questions": [
+   {
+    "q": "الاسم النكرة في «قرأتُ كتابًا في المكتبةِ»:",
+    "options": [
+     "كتابًا",
+     "المكتبة",
+     "قرأتُ",
+     "في"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع (هؤلاء) في «قابلتُ هؤلاءِ الأبطالَ»:",
+    "options": [
+     "علم",
+     "اسم موصول",
+     "ضمير",
+     "اسم إشارة"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "علامة جر (أبيك) في «اتصلتُ بأبيك»:",
+    "options": [
+     "الياء",
+     "الألف",
+     "الكسرة",
+     "الواو"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع الخبر في «النهرُ ماؤه عذبٌ»:",
+    "options": [
+     "جملة فعلية",
+     "شبه جملة",
+     "جملة اسمية",
+     "مفرد"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "اختر الصحيح: «أصبح الجوُّ ...».",
+    "options": [
+     "معتدلٍ",
+     "معتدلًا",
+     "معتدلان",
+     "معتدلٌ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "اختر الصحيح: «إنّ ... مخلصٌ».",
+    "options": [
+     "الصديقَ",
+     "الأصدقاءُ",
+     "الصديقان",
+     "الصديقُ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الاسم المعرفة في «شربتُ لبنًا في الصباحِ»:",
+    "options": [
+     "الصباح",
+     "لبنًا",
+     "شربتُ",
+     "في"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع (نحن) في «نحن نحافظ على البيئة»:",
+    "options": [
+     "علم",
+     "ضمير متصل",
+     "اسم إشارة",
+     "ضمير منفصل"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "إعراب (ذا) في «يحترم الناسُ ذا الخلقِ»:",
+    "options": [
+     "اسم مجرور وعلامة جره الياء",
+     "فاعل مرفوع وعلامة رفعه الواو",
+     "مفعول به منصوب وعلامة نصبه الألف",
+     "مفعول به منصوب وعلامة نصبه الفتحة"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "نوع الخبر في «الفلاحُ يزرعُ الأرضَ»:",
+    "options": [
+     "جملة فعلية",
+     "جملة اسمية",
+     "شبه جملة",
+     "مفرد"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "اسم (أمسى) في «أمسى الطريقُ مزدحمًا»:",
+    "options": [
+     "الطريق",
+     "أمسى",
+     "مزدحمًا",
+     "لا يوجد"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع خبر (ليت) في «ليت الشبابَ يعودُ»:",
+    "options": [
+     "يعود: مفرد",
+     "يعود: جملة فعلية",
+     "الشباب: جملة اسمية",
+     "الشباب: مفرد"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "تحويل (طائرًا) إلى معرفة في «رأيتُ طائرًا»:",
+    "options": [
+     "رأيتُ طائرٌ",
+     "رأيتُ طائرين",
+     "رأيتُ الطائرَ",
+     "رأيتُ طيورًا"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "نوع (حديقة) في «حديقةُ المدرسةِ واسعةٌ»:",
+    "options": [
+     "معرف بأل",
+     "نكرة",
+     "مضاف إلى معرفة",
+     "علم"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "الجملة التي فيها اسم من الأسماء الخمسة معرب بالحروف:",
+    "options": [
+     "حموكِ رجلٌ طيبٌ",
+     "فمُ الطفلِ صغيرٌ",
+     "أحبُّ أخي كثيرًا",
+     "الإخوةُ متعاونون"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع الخبر في «الكتابُ فوقَ المكتبِ»:",
+    "options": [
+     "مفرد",
+     "شبه جملة ظرف مكان",
+     "شبه جملة ظرف زمان",
+     "شبه جملة جار ومجرور"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "إعراب (مجتهدين) في «صار الطلابُ مجتهدين»:",
+    "options": [
+     "خبر صار مرفوع وعلامة رفعه الواو",
+     "اسم صار مرفوع وعلامة رفعه الواو",
+     "خبر صار منصوب وعلامة نصبه الفتحة",
+     "خبر صار منصوب وعلامة نصبه الياء"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "إعراب (المجتهدين) في «إنّ المجتهدين ناجحون»:",
+    "options": [
+     "اسم إن منصوب وعلامة نصبه الياء",
+     "خبر إن مرفوع وعلامة رفعه الواو",
+     "اسم إن مرفوع وعلامة رفعه الواو",
+     "اسم إن منصوب وعلامة نصبه الفتحة"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الاسم الذي يدل على شيء غير محدد يسمى:",
+    "options": [
+     "معرفة",
+     "علمًا",
+     "ضميرًا",
+     "نكرة"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع (الذي) في «فاز الطالبُ الذي اجتهد»:",
+    "options": [
+     "اسم موصول",
+     "ضمير",
+     "معرف بأل",
+     "اسم إشارة"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "«جاء أخوك» لو جعلنا (أخوك) مفعولًا به لقلنا:",
+    "options": [
+     "رأيتُ أخوك",
+     "رأيتُ أخك",
+     "رأيتُ أخاك",
+     "رأيتُ أخيك"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "الخبر في «المهندسون ماهرون» ونوعه:",
+    "options": [
+     "ماهرون: جملة اسمية",
+     "ماهرون: مفرد",
+     "ماهرون: شبه جملة",
+     "المهندسون: مفرد"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "عند إدخال (ظلّ) على «العاملاتُ نشيطاتٌ» نقول:",
+    "options": [
+     "ظلّت العاملاتُ نشيطاتٌ",
+     "ظلّت العاملاتِ نشيطاتٌ",
+     "ظلّت العاملاتُ نشيطاتٍ",
+     "ظلّت العاملاتِ نشيطاتٍ"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "عند إدخال (كأنّ) على «النجومُ مصابيحُ» نقول:",
+    "options": [
+     "كأنّ النجومُ مصابيحَ",
+     "كأنّ النجومَ مصابيحَ",
+     "كأنّ النجومِ مصابيحُ",
+     "كأنّ النجومَ مصابيحُ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "الجملة التي فيها اسم نكرة:",
+    "options": [
+     "في الحديقةِ شجرةٌ",
+     "سافر محمدٌ إلى القاهرةِ",
+     "جاء الذي فاز",
+     "أنا أحبُّ وطني"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "العلم في «تقع دمياطُ على البحرِ»:",
+    "options": [
+     "على",
+     "دمياط",
+     "البحر",
+     "تقع"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "لم تُعرب (أخي) في «أخي مهندسٌ» بالحروف لأنها:",
+    "options": [
+     "مضافة إلى ياء المتكلم",
+     "بها حرف الميم",
+     "مثنى",
+     "جمع"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الرابط في «الحديقةُ أزهارُها متفتحةٌ»:",
+    "options": [
+     "أزهار",
+     "متفتحة",
+     "الضمير (ها) في أزهارها",
+     "الحديقة"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "من أخوات (كان):",
+    "options": [
+     "أضحى",
+     "لعلّ",
+     "كأنّ",
+     "ليت"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "ليس من أخوات (إنّ):",
+    "options": [
+     "أمسى",
+     "لعلّ",
+     "ليت",
+     "كأنّ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "عدد الأسماء النكرة في «في الصفِّ تلميذٌ جديدٌ»:",
+    "options": [
+     "اثنان",
+     "ثلاثة",
+     "لا يوجد",
+     "واحد"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "المعرفة التي نوعها علم:",
+    "options": [
+     "الذي",
+     "الشمس",
+     "هذا",
+     "محمود"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "«الأبوان يرعيان الأبناءَ» لم تُعرب (الأبوان) بالحروف لأنها:",
+    "options": [
+     "مثنى",
+     "جمع",
+     "مضافة إلى ياء المتكلم",
+     "بمعنى صاحب"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الخبر الذي يحتاج إلى رابط يعود على المبتدأ:",
+    "options": [
+     "الخبر المفرد",
+     "الخبر الجملة",
+     "كل أنواع الخبر",
+     "الخبر شبه الجملة"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "نوع خبر (بات) في «بات القمرُ ضوؤه ساطعٌ»:",
+    "options": [
+     "جملة فعلية",
+     "مفرد",
+     "شبه جملة",
+     "جملة اسمية"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع خبر (لكنّ) في «الطقسُ باردٌ لكنّ الشمسَ ساطعةٌ»:",
+    "options": [
+     "شبه جملة",
+     "مفرد",
+     "جملة فعلية",
+     "جملة اسمية"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "في «وجدتُ ساعةً» ثم «وجدتُ الساعةَ» تحولت (ساعة):",
+    "options": [
+     "من نكرة إلى معرفة بأل",
+     "من نكرة إلى علم",
+     "من معرفة إلى ضمير",
+     "من معرفة إلى نكرة"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "المعرفة التي نوعها اسم إشارة في «ذلك الجبلُ مرتفعٌ»:",
+    "options": [
+     "الجبل",
+     "لا يوجد",
+     "ذلك",
+     "مرتفع"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "(بات) في «بات المريضُ مرتاحًا» تعمل:",
+    "options": [
+     "ترفع الاسم وتنصب الخبر",
+     "تنصب الاسم وترفع الخبر",
+     "تنصب الاسم والخبر",
+     "ترفع الاسم والخبر"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع خبر (إنّ) في «إنّ الكتابَ بين يديك»:",
+    "options": [
+     "شبه جملة ظرف مكان",
+     "شبه جملة ظرف زمان",
+     "شبه جملة جار ومجرور",
+     "مفرد"
+    ],
+    "ans": 0
+   }
+  ]
+ },
+ {
+  "id": "bubbles",
+  "title": "الفقاعات المتساقطة",
+  "type": "bubbles",
+  "desc": "40 فقاعة نحوية من كل دروس القواعد",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M21.21 15.89A10 10 0 1 1 8 2.83\"></path><path d=\"M22 12A10 10 0 0 0 12 2v10z\"></path></svg>",
+  "questions": [
+   {
+    "q": "نكرة أم معرفة: «بستانٌ»",
+    "options": [
+     "حرف",
+     "فعل",
+     "نكرة",
+     "معرفة"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "نوع «أنتِ»",
+    "options": [
+     "ضمير",
+     "اسم موصول",
+     "اسم إشارة",
+     "علم"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "علامة نصب «أخاك»",
+    "options": [
+     "الواو",
+     "الألف",
+     "الفتحة",
+     "الياء"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "نوع الخبر: «العلمُ نورٌ»",
+    "options": [
+     "جملة فعلية",
+     "مفرد",
+     "جملة اسمية",
+     "شبه جملة"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "اسم «صار» في «صار الماءُ ثلجًا»",
+    "options": [
+     "ثلجًا",
+     "صار",
+     "الماء",
+     "الثلج"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "اسم «إنّ» في «إنّ اللهَ غفورٌ»",
+    "options": [
+     "الله",
+     "لا يوجد",
+     "غفور",
+     "إنّ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "معرفة «سيارةً»",
+    "options": [
+     "سيارةٌ",
+     "سيارتان",
+     "سيارات",
+     "السيارة"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع «هاتان»",
+    "options": [
+     "ضمير",
+     "اسم إشارة",
+     "اسم موصول",
+     "علم"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "«ذو» في «ذو المالِ كريمٌ»",
+    "options": [
+     "فاعل مرفوع بالواو",
+     "مبتدأ مرفوع بالضمة",
+     "خبر مرفوع بالواو",
+     "مبتدأ مرفوع بالواو"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع الخبر: «الشمسُ تشرقُ»",
+    "options": [
+     "مفرد",
+     "شبه جملة",
+     "جملة فعلية",
+     "جملة اسمية"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "خبر «أضحى»: «أضحى الطفلُ نائمًا»",
+    "options": [
+     "نومًا",
+     "أضحى",
+     "نائمًا",
+     "الطفل"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "خبر «لعلّ»: «لعلّ الجوَّ معتدلٌ»",
+    "options": [
+     "لعلّ",
+     "معتدل",
+     "لا يوجد",
+     "الجو"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "نكرة «القمر»",
+    "options": [
+     "الأقمار",
+     "قمرنا",
+     "القمران",
+     "قمرٌ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع «اللذان»",
+    "options": [
+     "علم",
+     "اسم إشارة",
+     "اسم موصول",
+     "ضمير"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "صحّح: «أحترمُ أبوك»",
+    "options": [
+     "أحترمُ أبك",
+     "أحترمُ أبوكم",
+     "أحترمُ أباك",
+     "أحترمُ أبيك"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "نوع الخبر: «الرحلةُ يومَ الخميسِ»",
+    "options": [
+     "ظرف زمان",
+     "جار ومجرور",
+     "ظرف مكان",
+     "مفرد"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "اختر: «كان الحفلُ ...»",
+    "options": [
+     "رائعان",
+     "رائعٍ",
+     "رائعًا",
+     "رائعٌ"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "اختر: «إنّ العملَ ...»",
+    "options": [
+     "مفيدٍ",
+     "مفيدًا",
+     "مفيدان",
+     "مفيدٌ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "النكرة في «زرعتُ شجرةً»",
+    "options": [
+     "التاء",
+     "شجرةً",
+     "لا توجد",
+     "زرعتُ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "نوع «يناير»",
+    "options": [
+     "علم",
+     "نكرة",
+     "ضمير",
+     "اسم إشارة"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أيّها من الأسماء الخمسة؟",
+    "options": [
+     "عم",
+     "أم",
+     "حمو",
+     "ابن"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "نوع الخبر: «الأمُّ حنانُها كبيرٌ»",
+    "options": [
+     "جملة فعلية",
+     "مفرد",
+     "شبه جملة",
+     "جملة اسمية"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "علامة نصب الخبر: «ظلّت البناتُ متعاوناتٍ»",
+    "options": [
+     "الكسرة",
+     "الألف",
+     "الفتحة",
+     "الياء"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "إنّ وأخواتها تنصب",
+    "options": [
+     "الفاعل",
+     "الخبر",
+     "المبتدأ",
+     "المفعول به"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "المعرفة في «في البيتِ قطٌّ»",
+    "options": [
+     "قطّ",
+     "في",
+     "لا توجد",
+     "البيت"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع «بابُ الفصلِ» (المضاف)",
+    "options": [
+     "معرف بأل",
+     "مضاف إلى معرفة",
+     "علم",
+     "نكرة"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "«حماها» في «زارت حماها»",
+    "options": [
+     "مفعول به منصوب بالألف",
+     "مفعول به منصوب بالفتحة",
+     "اسم مجرور بالياء",
+     "فاعل مرفوع بالألف"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الرابط في «الطفلُ يلعبُ»",
+    "options": [
+     "يلعب",
+     "لا يوجد",
+     "الطفل",
+     "ضمير مستتر (هو)"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع خبر «بات الحارسُ أمامَ البابِ»",
+    "options": [
+     "ظرف مكان",
+     "ظرف زمان",
+     "مفرد",
+     "جار ومجرور"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "علامة نصب «الطالبَين» في «إنّ الطالبَين مجتهدان»",
+    "options": [
+     "الياء",
+     "الفتحة",
+     "الألف",
+     "الكسرة"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "يُعرَّف الاسم النكرة بإضافة",
+    "options": [
+     "«ال»",
+     "تاء التأنيث",
+     "الواو",
+     "التنوين"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع «الشمس»",
+    "options": [
+     "علم",
+     "معرف بأل",
+     "ضمير",
+     "اسم إشارة"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "لماذا لا تُعرب «فمُك» بالحروف؟",
+    "options": [
+     "لأنها جمع",
+     "لأنها غير مضافة",
+     "لأن بها الميم",
+     "لأنها مثنى"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "نوع الخبر: «القلمُ في الحقيبةِ»",
+    "options": [
+     "ظرف مكان",
+     "ظرف زمان",
+     "مفرد",
+     "جار ومجرور"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "كان وأخواتها تنصب",
+    "options": [
+     "المفعول به",
+     "الفاعل",
+     "المبتدأ",
+     "الخبر"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع خبر «كأنّ الوردَ يبتسمُ»",
+    "options": [
+     "شبه جملة",
+     "مفرد",
+     "جملة اسمية",
+     "جملة فعلية"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "نوع «هم»",
+    "options": [
+     "ضمير متصل",
+     "اسم موصول",
+     "ضمير منفصل",
+     "اسم إشارة"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "اختر: «سلّمتُ على ...»",
+    "options": [
+     "أخيك",
+     "أخك",
+     "أخاك",
+     "أخوك"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع الخبر: «البنتان مؤدبتان»",
+    "options": [
+     "شبه جملة",
+     "جملة فعلية",
+     "مفرد",
+     "جملة اسمية"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "اسم كان في «كنّا متعاونين»",
+    "options": [
+     "متعاونين",
+     "الضمير «نا»",
+     "نحن",
+     "كان"
+    ],
+    "ans": 1
+   }
+  ]
+ },
+ {
+  "id": "shooting",
+  "title": "التنشين والاصطياد",
+  "type": "shooting",
+  "desc": "40 هدفًا نحويًّا: صوّب نحو الإجابة الصحيحة",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><circle cx=\"12\" cy=\"12\" r=\"6\"></circle><circle cx=\"12\" cy=\"12\" r=\"2\"></circle></svg>",
+  "questions": [
+   {
+    "q": "أكمل: «اشتريتُ ... جديدًا» (نكرة).",
+    "options": [
+     "قميصًا",
+     "القميصَ",
+     "هذا",
+     "قميصي"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «... الطالبُ متفوقٌ» (اسم إشارة).",
+    "options": [
+     "هو",
+     "هذا",
+     "الذي",
+     "هذه"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «احترمْ ... وأمَّك».",
+    "options": [
+     "أباك",
+     "أبك",
+     "أبيك",
+     "أبوك"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «الخبر شبه الجملة إما ظرف أو ...».",
+    "options": [
+     "جار ومجرور",
+     "فعل",
+     "مفرد",
+     "جملة اسمية"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «كان وأخواتها ترفع المبتدأ ويسمى ...».",
+    "options": [
+     "اسمها",
+     "مفعولها",
+     "فاعلها",
+     "خبرها"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «إنّ وأخواتها تنصب المبتدأ وترفع ...».",
+    "options": [
+     "الحال",
+     "المفعول به",
+     "الخبر",
+     "الفاعل"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «أشرقت ... في الصباح» (معرفة بأل).",
+    "options": [
+     "قمرٌ",
+     "شمسٌ",
+     "نجمةٌ",
+     "الشمسُ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "أكمل: «جاءت الطالبةُ ... فازت» (اسم موصول).",
+    "options": [
+     "الذين",
+     "الذي",
+     "التي",
+     "هذه"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «جاء ... العلمِ إلى المؤتمر».",
+    "options": [
+     "ذا",
+     "ذو",
+     "ذوي",
+     "ذي"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «الخبر الجملة نوعان: اسمية و...».",
+    "options": [
+     "ظرفية",
+     "شبه جملة",
+     "مفردة",
+     "فعلية"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "أكمل: «أمسى الفلاحُ ...» (خبر مفرد).",
+    "options": [
+     "ينام مبكرًا",
+     "متعبٌ",
+     "متعبًا",
+     "في الحقل"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «لعلّ ... حاضرٌ».",
+    "options": [
+     "المديرَ",
+     "المديرِ",
+     "المديرُ",
+     "المديرون"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «النكرة إذا دخلت عليها (ال) صارت ...».",
+    "options": [
+     "فعلًا",
+     "معرفة",
+     "نكرة",
+     "حرفًا"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «... تلميذاتٌ مجتهداتٌ» (ضمير).",
+    "options": [
+     "أنتنّ",
+     "الذي",
+     "هذا",
+     "أنتَ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «تحدّثتُ مع ...» (أخ + كَ).",
+    "options": [
+     "أخك",
+     "أخيك",
+     "أخاك",
+     "أخوك"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «العصفورُ ...» (خبر جملة فعلية).",
+    "options": [
+     "صوتُه جميلٌ",
+     "مغرّدٌ",
+     "يغرّدُ",
+     "فوق الشجرة"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «أصبح ... نشيطين».",
+    "options": [
+     "لاعبٌ",
+     "اللاعبين",
+     "اللاعبِ",
+     "اللاعبون"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "أكمل: «كأنّ الأطفالَ ...» (خبر مفرد).",
+    "options": [
+     "زهورٍ",
+     "زهورٌ",
+     "في الحديقة",
+     "زهورًا"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «كلمة (بابٌ) نكرة، وكلمة (البابُ) ...».",
+    "options": [
+     "حرف",
+     "فعل",
+     "معرفة",
+     "نكرة"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «سافر ... إلى المدينة» (علم).",
+    "options": [
+     "الذي",
+     "هذا",
+     "خالدٌ",
+     "الولدُ"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «تُشترط إضافة الأسماء الخمسة لغير ...».",
+    "options": [
+     "كاف المخاطب",
+     "ياء المتكلم",
+     "هاء الغائب",
+     "الاسم الظاهر"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «المكتبةُ ...» (شبه جملة جار ومجرور).",
+    "options": [
+     "واسعةٌ",
+     "في المدرسة",
+     "أمامَ المدرسة",
+     "تُفتح صباحًا"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «ظلّ الطالبُ ...» (خبر جملة فعلية).",
+    "options": [
+     "في الفصل",
+     "مجتهدًا",
+     "دروسُه كثيرةٌ",
+     "يذاكرُ دروسَه"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "أكمل: «ليت الشبابَ ...» (خبر جملة فعلية).",
+    "options": [
+     "يعودُ",
+     "عودتُه قريبةٌ",
+     "عندنا",
+     "عائدٌ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «في (سمعتُ صوتًا) الاسم النكرة ...».",
+    "options": [
+     "صوتًا",
+     "التاء",
+     "سمع",
+     "سمعتُ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «(كتابُ أحمدَ) معرفة لإضافته إلى ...».",
+    "options": [
+     "ضمير",
+     "نكرة",
+     "علم",
+     "اسم إشارة"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «(الآباء) لا تُعرب بالحروف لأنها ...».",
+    "options": [
+     "مضافة",
+     "مرفوعة",
+     "مفردة",
+     "جمع"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "أكمل: «النخلةُ ...» (خبر جملة اسمية).",
+    "options": [
+     "ثمارُها لذيذةٌ",
+     "تُثمر بلحًا",
+     "في الحقل",
+     "طويلةٌ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «خبر كان الجملة وشبه الجملة في محل ...».",
+    "options": [
+     "نصب",
+     "جزم",
+     "جر",
+     "رفع"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «اسم إنّ وأخواتها يكون ...».",
+    "options": [
+     "مرفوعًا",
+     "مجرورًا",
+     "منصوبًا",
+     "مجزومًا"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «سمعتُ ... الجميلَ» (معرفة).",
+    "options": [
+     "أصواتًا",
+     "صوتًا",
+     "صوتٌ",
+     "الصوتَ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "أكمل: «في (قلمُك جميلٌ) الكاف ضمير ...».",
+    "options": [
+     "منفصل",
+     "إشارة",
+     "متصل",
+     "موصول"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «لا يخرجْ من ... إلا الخيرُ».",
+    "options": [
+     "فوك",
+     "فوكم",
+     "فيك",
+     "فاك"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «في (الوطنُ نحميه) الرابط هو ...».",
+    "options": [
+     "النون",
+     "نحن",
+     "الهاء",
+     "الوطن"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "أكمل: «ليس الكسلُ ...».",
+    "options": [
+     "مفيدًا",
+     "مفيدان",
+     "مفيدٌ",
+     "مفيدٍ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «لكنّ من أخوات ...».",
+    "options": [
+     "إنّ",
+     "كان",
+     "أصبح",
+     "صار"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «يا أحمدُ، اقرأ ... مفيدةً» (نكرة).",
+    "options": [
+     "قصةً",
+     "قصتَك",
+     "هذه",
+     "القصةَ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «الطلابُ ... نجحوا مكرَّمون» (موصول).",
+    "options": [
+     "الذين",
+     "الذي",
+     "هؤلاء",
+     "التي"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «الخبر المفرد قد يكون مثنى أو ...».",
+    "options": [
+     "ظرفًا",
+     "جمعًا",
+     "جملة",
+     "جارًّا ومجرورًا"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «من أخوات كان: أصبح وأمسى و...».",
+    "options": [
+     "إنّ",
+     "لعلّ",
+     "بات",
+     "ليت"
+    ],
+    "ans": 2
+   }
+  ]
+ },
+ {
+  "id": "true_false",
+  "title": "صح أم خطأ",
+  "type": "true_false",
+  "desc": "40 عبارة نحوية: حدد الصحيح من الخطأ",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path><polyline points=\"22 4 12 14.01 9 11.01\"></polyline></svg>",
+  "questions": [
+   {
+    "q": "في «شاهدتُ فيلمًا» كلمة (فيلمًا) اسم نكرة.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "(هاتان) اسم إشارة.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "في «إنّ أباك كريمٌ» علامة نصب (أباك) الألف.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الخبر في «الأشجارُ أوراقُها خضراءُ» جملة اسمية.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «صار الجوُّ حارًّا» كلمة (حارًّا) خبر صار منصوب.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "في «ليت الطفلَ نائمٌ» خبر ليت مرفوع.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "كلمة (الكتاب) نكرة لأنها تدل على شيء غير محدد.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "(اللذان) ضمير منفصل.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "(أخي) في «سافر أخي» فاعل مرفوع وعلامة رفعه الواو.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الخبر في «الحصةُ بعدَ الفسحةِ» شبه جملة جار ومجرور.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «أصبح العمالُ نشيطين» كلمة (العمال) اسم أصبح منصوب.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «إنّ اللاعبين متحمسون» علامة نصب اسم إنّ الياء.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "إذا حذفنا (ال) من الاسم المعرف بأل ونوّنّاه صار نكرة.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "(مصر) معرفة لأنها علم.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "في «رجلٌ ذو مروءةٍ» كلمة (ذو) بمعنى صاحب.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "الخبر في «الطالبُ ينجحُ بالمذاكرة» جملة فعلية.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "(ظلّ) و(بات) من أخوات كان.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "(إنّ وأخواتها) أفعال ناسخة.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "في «في السماءِ نجومٌ» كلمة (نجوم) معرفة.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "(بيتُنا) معرفة لأنها مضافة إلى ضمير.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الأسماء الخمسة تُجر بالكسرة.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "الرابط في «الأمُّ تحبُّ أبناءَها» ضمير مستتر في (تحب) تقديره هي.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "(لعلّ) من أخوات كان.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «كأنّ القمرَ مصباحٌ» الخبر مفرد.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «ركبتُ القطارَ» كلمة (القطار) معرفة.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "(هي) اسم موصول.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "(أبي) في «قبّلتُ رأسَ أبي» تُعرب بالحروف.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "الخبر في «الطائرتان مسرعتان» مفرد.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "في «كان التلميذُ يكتبُ الدرسَ» خبر كان جملة فعلية.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «لعلّ الضيفَ يحضرُ» خبر لعلّ جملة اسمية.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "كلمة (طبيبٌ) تدل على طبيب محدد بعينه.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "(الحديقة) معرفة لأنها علم.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "(أبو) في «أبو بكرٍ صحابيٌّ جليلٌ» مبتدأ مرفوع وعلامة رفعه الواو.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «الحقُّ صوتُه عالٍ» المبتدأ الثاني كلمة (عالٍ).",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «أمسى الطفلُ في سريره» خبر أمسى مفرد.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «إنّ أخاك أمامَ المدرسةِ» الخبر شبه جملة ظرف مكان.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «شربتُ ماءً باردًا» الاسمان (ماءً، باردًا) نكرتان.",
+    "options": [
+     "صح",
+     "خطأ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في (كتابي) الياء ضمير متصل.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "(حموها) في «زارها حموها» فاعل مرفوع وعلامة رفعه الواو.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "الخبر في «السوقُ قريبٌ من البيت» شبه جملة.",
+    "options": [
+     "خطأ",
+     "صح"
+    ],
+    "ans": 0
+   }
+  ]
+ },
+ {
+  "id": "genius",
+  "title": "تحدي العباقرة",
+  "type": "genius",
+  "desc": "40 سؤالًا نحويًّا للعباقرة بعدّاد زمني",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9.663 17h4.673M12 3a6 6 0 0 0-6 6c0 1.887.454 2.921 1.5 4.5.5.75 1 1.5 1 2.5h7c0-1 .5-1.75 1-2.5C17.546 11.921 18 10.887 18 9a6 6 0 0 0-6-6z\"></path></svg>",
+  "questions": [
+   {
+    "q": "في «رأيتُ رجلًا يساعدُ الفقراءَ» الاسم النكرة وإعرابه:",
+    "options": [
+     "الفقراء: نكرة مجرورة",
+     "رجلًا: مفعول به منصوب",
+     "رجلًا: فاعل مرفوع",
+     "الفقراء: مفعول به منصوب"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "في «هذا الذي فاز» نوع المعرفتين على الترتيب:",
+    "options": [
+     "اسم إشارة - اسم موصول",
+     "ضمير - اسم موصول",
+     "اسم إشارة - ضمير",
+     "اسم موصول - اسم إشارة"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "أكمل: «إنّ ... رحيمٌ» (أب + ك):",
+    "options": [
+     "أبيك",
+     "أبك",
+     "أباك",
+     "أبوك"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "تحويل «الحديقةُ جميلةُ الأزهارِ» إلى خبر جملة اسمية:",
+    "options": [
+     "الحديقةُ تجمُلُ أزهارُها",
+     "الحديقةُ أزهارُها جميلةٌ",
+     "الحديقةُ أزهارُهم جميلةٌ",
+     "الحديقةُ بين الأزهارِ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "عند إدخال (كان) على «المهندسان ماهران» نقول:",
+    "options": [
+     "كان المهندسَين ماهرَين",
+     "كان المهندسان ماهرَين",
+     "كان المهندسان ماهران",
+     "كان المهندسَين ماهران"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "عند إدخال (إنّ) على «المسلمون متعاونون» نقول:",
+    "options": [
+     "إنّ المسلمين متعاونين",
+     "إنّ المسلمون متعاونين",
+     "إنّ المسلمون متعاونون",
+     "إنّ المسلمين متعاونون"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "الجملة التي فيها اسمان نكرتان:",
+    "options": [
+     "الطالبُ في الفصلِ",
+     "في الفصلِ طالبٌ جديدٌ",
+     "هذا الطالبُ جديدٌ",
+     "جاء الطالبُ الجديدُ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أنواع المعارف في «أنتِ صديقةُ أختي» على الترتيب:",
+    "options": [
+     "اسم إشارة - مضاف إلى معرفة - علم",
+     "ضمير - مضاف إلى معرفة - مضاف إلى معرفة",
+     "ضمير - علم - مضاف إلى معرفة",
+     "ضمير - معرف بأل - علم"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "أكمل: «كان ... مسافرًا» (أخ + ه):",
+    "options": [
+     "أخه",
+     "أخيه",
+     "أخاه",
+     "أخوه"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "إعراب (يحبُّ تلاميذَه) في «المعلمُ يحبُّ تلاميذَه»:",
+    "options": [
+     "جملة فعلية في محل نصب خبر",
+     "خبر مفرد مرفوع",
+     "جملة فعلية في محل رفع خبر",
+     "جملة اسمية في محل رفع خبر"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "عند حذف الناسخ من «أصبح المعلمون مستعدين» نقول:",
+    "options": [
+     "المعلمين مستعدون",
+     "المعلمون مستعدون",
+     "المعلمين مستعدين",
+     "المعلمون مستعدين"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "عند إدخال (لعلّ) على «ذو الخبرةِ ناجحٌ» نقول:",
+    "options": [
+     "لعلّ ذا الخبرةِ ناجحًا",
+     "لعلّ ذي الخبرةِ ناجحٌ",
+     "لعلّ ذا الخبرةِ ناجحٌ",
+     "لعلّ ذو الخبرةِ ناجحٌ"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "تحويل النكرة إلى معرفة في «قرأتُ قصةً جميلةً» تحويلًا صحيحًا:",
+    "options": [
+     "قرأتُ القصةُ الجميلةُ",
+     "قرأتُ قصصًا جميلةً",
+     "قرأتُ القصةَ الجميلةَ",
+     "قرأتُ القصةَ الجميلةُ"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "في «زارنا خالدٌ» الضمير المتصل:",
+    "options": [
+     "خالد",
+     "نا",
+     "لا يوجد",
+     "زار"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "إعراب (أخاك) في «ليتَ أخاك معنا»:",
+    "options": [
+     "اسم ليت منصوب وعلامة نصبه الفتحة",
+     "اسم ليت منصوب وعلامة نصبه الألف",
+     "خبر ليت مرفوع وعلامة رفعه الواو",
+     "مفعول به منصوب وعلامة نصبه الألف"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "الجملة التي خبرها شبه جملة ظرف زمان:",
+    "options": [
+     "السفرُ مساءً",
+     "السفرُ ممتعٌ",
+     "السفرُ إلى أسوان",
+     "المحطةُ أمامَ البيت"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "نوع خبر (ظلّ) في «ظلّ الجنديُّ فوقَ البرجِ»:",
+    "options": [
+     "شبه جملة جار ومجرور",
+     "شبه جملة ظرف زمان",
+     "شبه جملة ظرف مكان",
+     "مفرد"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "إعراب (أشجارُها مثمرةٌ) في «كأنّ الحديقةَ أشجارُها مثمرةٌ»:",
+    "options": [
+     "اسم كأنّ وخبرها",
+     "جملة فعلية في محل رفع خبر كأنّ",
+     "جملة اسمية في محل نصب خبر كأنّ",
+     "جملة اسمية في محل رفع خبر كأنّ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "في «الصدقُ خلقٌ كريمٌ» المبتدأ والخبر من حيث التعريف والتنكير:",
+    "options": [
+     "كلاهما معرفة",
+     "كلاهما نكرة",
+     "المبتدأ نكرة والخبر معرفة",
+     "المبتدأ معرفة والخبر نكرة"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "الاسم الذي اكتسب التعريف بإضافته إلى اسم إشارة:",
+    "options": [
+     "قلمُ محمدٍ",
+     "قلمُ هذا الطالبِ",
+     "قلمُ الطالبِ",
+     "قلمُك"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "إعراب (ذا) في «أصبح العالمُ ذا شهرةٍ»:",
+    "options": [
+     "خبر أصبح منصوب وعلامة نصبه الألف",
+     "مفعول به منصوب وعلامة نصبه الألف",
+     "خبر أصبح منصوب وعلامة نصبه الفتحة",
+     "اسم أصبح منصوب وعلامة نصبه الألف"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الجملة التي فيها خطأ في الرابط:",
+    "options": [
+     "المهندسون يبنون البيوتَ",
+     "الأشجارُ أغصانُها طويلةٌ",
+     "البنتُ عملُها متقنٌ",
+     "الأشجارُ أغصانُه طويلةٌ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "إعراب (مئذنتُه عاليةٌ) في «صار المسجدُ مئذنتُه عاليةٌ»:",
+    "options": [
+     "جملة فعلية في محل نصب خبر صار",
+     "جملة اسمية في محل نصب خبر صار",
+     "جملة اسمية في محل رفع خبر صار",
+     "خبر مفرد منصوب"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "الفرق بين «كان الجوُّ صحوًا» و«إنّ الجوَّ صحوٌ»:",
+    "options": [
+     "كلاهما نصب المبتدأ",
+     "كان نصبت المبتدأ، وإنّ نصبت الخبر",
+     "كان نصبت الخبر، وإنّ نصبت المبتدأ",
+     "كلاهما نصب الخبر"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "الاسم المعرفة في «أهدى صديقٌ صديقَه كتابًا»:",
+    "options": [
+     "صديقَه",
+     "أهدى",
+     "كتابًا",
+     "صديقٌ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "عدد المعارف في «هذه حديقةُ محمدٍ»:",
+    "options": [
+     "أربعة",
+     "اثنان",
+     "واحد",
+     "ثلاثة"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "الجملة الصحيحة نحويًّا:",
+    "options": [
+     "لعلّ أبيك مسافرٌ",
+     "صار أباك مديرًا",
+     "إنّ أبوك مديرٌ",
+     "صار أبوك مديرًا"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "في «الفلاحون يزرعون الأرضَ» الرابط هو:",
+    "options": [
+     "واو الجماعة في (يزرعون)",
+     "النون في (يزرعون)",
+     "الفلاحون",
+     "الأرض"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "الخطأ النحوي في:",
+    "options": [
+     "بات الحارسُ يقظًا",
+     "أمسى الجوُّ باردًا",
+     "ظلّت السماءُ صافيةً",
+     "أمسى الجوُّ باردٌ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "الجملة التي اسم الناسخ فيها ضمير متصل:",
+    "options": [
+     "إنّ الطالبَ مجتهدٌ",
+     "كأنّ الماءَ مرآةٌ",
+     "لعلّ محمدًا قادمٌ",
+     "إنّك مجتهدٌ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "«اشتريتُ ... من السوقِ» الكلمة المناسبة مفعولًا به نكرة:",
+    "options": [
+     "فاكهةً",
+     "فاكهةٌ",
+     "فاكهتَنا",
+     "الفاكهةَ"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «القصةُ التي قرأتُها ممتعةٌ» نوع (التي) وإعراب (القصة):",
+    "options": [
+     "ضمير، والقصة مبتدأ",
+     "اسم موصول، والقصة مبتدأ",
+     "اسم موصول، والقصة خبر",
+     "اسم إشارة، والقصة مبتدأ"
+    ],
+    "ans": 1
+   },
+   {
+    "q": "إعراب (أبوه) في «الطفلُ أبوه طبيبٌ»:",
+    "options": [
+     "خبر مرفوع وعلامة رفعه الواو",
+     "مبتدأ ثانٍ مرفوع وعلامة رفعه الضمة",
+     "فاعل مرفوع وعلامة رفعه الواو",
+     "مبتدأ ثانٍ مرفوع وعلامة رفعه الواو"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "خبر مناسب للمبتدأ «التلميذاتُ ...» (جملة فعلية):",
+    "options": [
+     "يذاكرُ دروسَه",
+     "مجتهداتٌ",
+     "يذاكرْنَ دروسَهن",
+     "في الفصلِ"
+    ],
+    "ans": 2
+   },
+   {
+    "q": "اسم (ليس) في «العلمُ ليس صعبًا»:",
+    "options": [
+     "ضمير مستتر تقديره هو",
+     "صعبًا",
+     "العلم",
+     "لا يوجد"
+    ],
+    "ans": 0
+   },
+   {
+    "q": "في «علمتُ أنّ الامتحانَ بعدَ أسبوعٍ» نوع خبر (أنّ):",
+    "options": [
+     "شبه جملة جار ومجرور",
+     "مفرد",
+     "جملة فعلية",
+     "شبه جملة ظرف زمان"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "(ذلك) في «ذلك نجمٌ لامعٌ» نوعها وموقعها:",
+    "options": [
+     "اسم موصول في محل رفع مبتدأ",
+     "اسم إشارة في محل رفع خبر",
+     "ضمير في محل رفع مبتدأ",
+     "اسم إشارة في محل رفع مبتدأ"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "الجملة التي لا تشتمل على اسم من الأسماء الخمسة معرب بالحروف:",
+    "options": [
+     "ابتسم أخوك",
+     "سلّمتُ على حميكِ",
+     "نظّفْ فاك جيدًا",
+     "نظّفتُ فمي جيدًا"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "تحوّل الخبر من «التعاونُ قوةٌ» إلى «التعاونُ يصنعُ القوةَ»:",
+    "options": [
+     "من جملة إلى مفرد",
+     "من شبه جملة إلى جملة فعلية",
+     "من مفرد إلى جملة اسمية",
+     "من مفرد إلى جملة فعلية"
+    ],
+    "ans": 3
+   },
+   {
+    "q": "إعراب (مبتسماتٍ) في «أضحت الفتياتُ مبتسماتٍ»:",
+    "options": [
+     "اسم أضحى مرفوع وعلامة رفعه الضمة",
+     "خبر أضحى منصوب وعلامة نصبه الكسرة",
+     "خبر أضحى منصوب وعلامة نصبه الفتحة",
+     "خبر أضحى مرفوع وعلامة رفعه الضمة"
+    ],
+    "ans": 1
+   }
+  ]
+ }
+];
+    // --- محرك الصوت للمؤثرات التفاعلية ---
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new AudioContext();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    function playTone(freq, type, duration, vol = 0.1) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    }
+
+    function playCorrect() {
+        initAudio();
+        playTone(523.25, 'sine', 0.1, 0.1); 
+        setTimeout(() => playTone(659.25, 'sine', 0.1, 0.1), 100); 
+        setTimeout(() => playTone(783.99, 'sine', 0.2, 0.15), 200); 
+        setTimeout(() => playTone(1046.50, 'sine', 0.4, 0.2), 300); 
+        triggerConfetti();
+    }
+
+    function playWrong() {
+        initAudio();
+        playTone(300, 'sawtooth', 0.15, 0.1);
+        setTimeout(() => playTone(200, 'sawtooth', 0.25, 0.15), 150);
+        
+        const qBox = document.querySelector('.question-box');
+        if(qBox) {
+            qBox.classList.remove('shake');
+            void qBox.offsetWidth; 
+            qBox.classList.add('shake');
+        }
+    }
+
+    // --- مؤثرات بصرية ---
+    function triggerConfetti() {
+        const colors = ['#f72585', '#4cc9f0', '#fee440', '#00f5d4', '#8b5cf6'];
+        for(let i=0; i<40; i++) {
+            let conf = document.createElement('div');
+            conf.className = 'confetti';
+            conf.style.left = Math.random() * 100 + 'vw';
+            conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            conf.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            document.body.appendChild(conf);
+            setTimeout(() => conf.remove(), 3000);
+        }
+    }
+
+    function shuffleArray(arr) {
+        return arr.map(a => ({sort: Math.random(), value: a}))
+            .sort((a, b) => a.sort - b.sort)
+            .map(a => a.value);
+    }
+
+    function showFeedback(isCorrect, callback) {
+        const modal = document.getElementById('feedback-modal');
+        const icon = document.getElementById('feedback-icon');
+        const title = document.getElementById('feedback-title');
+        
+        if (isCorrect) {
+            playCorrect();
+            icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+            title.textContent = 'إجابة صحيحة، بطل!';
+            title.style.color = 'var(--success)';
+        } else {
+            playWrong();
+            icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
+            title.textContent = 'إجابة خاطئة!';
+            title.style.color = 'var(--danger)';
+        }
+
+        modal.classList.add('active');
+        setTimeout(() => {
+            modal.classList.remove('active');
+            if (callback) callback();
+        }, 1300); // وقت الانتقال للسؤال التالي
+    }
+
+    // --- متغيرات محرك اللعبة ---
+    let currentGame = null;
+    let currentQuestions = [];
+    let qIndex = 0;
+    let animInterval = null;
+    let shootIntervals = [];
+    function clearShoot(){ shootIntervals.forEach(clearInterval); shootIntervals = []; }
+    let geniusTimerInterval = null;
+    let wrongAnswers = []; // مصفوفة لتخزين الأخطاء
+
+    // --- التهيئة ---
+    function initApp() {
+        const menuGrid = document.getElementById('menu-grid');
+        menuGrid.innerHTML = '';
+        allGamesData.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'menu-card';
+            card.innerHTML = `
+                <div class="icon-container">${game.icon}</div>
+                <h3>${game.title}</h3>
+                <p>${game.desc}</p>
+            `;
+            card.onclick = () => startGame(game);
+            menuGrid.appendChild(card);
+        });
+        
+        document.body.addEventListener('touchstart', initAudio, { once: true });
+        document.body.addEventListener('click', initAudio, { once: true });
+    }
+
+    function returnToMenu() {
+        clearInterval(animInterval); clearShoot(); clearInterval(geniusTimerInterval);
+        clearInterval(geniusTimerInterval);
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('home-screen').classList.remove('hidden');
+        document.getElementById('main-header').classList.remove('hidden');
+        document.getElementById('main-footer').classList.remove('hidden');
+    }
+
+    function updateProgress() {
+        document.getElementById('game-progress').innerText = `${qIndex + 1} / ${currentQuestions.length}`;
+    }
+
+    function gameComplete() {
+        const gc = document.getElementById('game-container');
+        playCorrect();
+        setTimeout(playCorrect, 300);
+
+        let score = currentQuestions.length - wrongAnswers.length;
+        let summaryHTML = '';
+
+        if (wrongAnswers.length > 0) {
+            summaryHTML += `
+            <div style="margin-top: 25px; text-align: right; background: #f8fafc; padding: 20px; border-radius: 15px; border: 2px solid #e2e8f0; max-height: 350px; overflow-y: auto;" class="errors-list">
+                <h3 style="color: var(--danger); margin-bottom: 15px; text-align: center; font-size: 1.4rem;">الأسئلة التي أخطأت فيها 📝</h3>
+                <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px;">`;
+            
+            wrongAnswers.forEach((item, index) => {
+                summaryHTML += `
+                <li style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-right: 5px solid var(--danger);">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 8px; font-size: 1.1rem;">${index + 1}. ${item.question}</div>
+                    <div style="color: #64748b; font-size: 1rem; margin-bottom: 5px;">إجابتك: <span style="color: var(--danger); text-decoration: line-through;">${item.selected}</span></div>
+                    <div style="color: var(--success); font-weight: bold; font-size: 1.1rem;">الإجابة الصحيحة: ${item.correct}</div>
+                </li>`;
+            });
+            summaryHTML += `</ul></div>`;
+        } else {
+            summaryHTML += `<p style="color: var(--success); font-size: 1.5rem; font-weight: bold; margin-top: 20px;">أداء مثالي! لم تخطئ في أي سؤال 🌟</p>`;
+        }
+
+        gc.innerHTML = `
+            <div style="text-align:center; padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                <div style="display:flex; justify-content:center; margin-bottom: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10"/><path d="M12 17v4"/><path d="M12 3v14"/><path d="M5 7h14"/><path d="M12 3l-4 4 4 4 4-4-4-4z"/></svg>
+                </div>
+                <h2 style="color: var(--primary); margin-bottom: 10px; font-size:2rem; font-weight:800;">انتهت اللعبة!</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 10px; color:#64748b; font-weight:bold;">نتيجتك: ${score} من ${currentQuestions.length}</p>
+                ${summaryHTML}
+                <div class="share-box">
+                    <h4>📲 أرسل نتيجتك إلى أ / أحمد السنتريسي</h4>
+                    <input type="text" id="student-name-input" class="share-name-input" placeholder="اكتب اسمك هنا أولًا">
+                    <div id="share-warning" class="share-warning">من فضلك اكتب اسمك أولًا قبل الإرسال ✋</div>
+                    <div>
+                        <button class="btn btn-share" onclick="sendResultToTeacher(${score}, ${currentQuestions.length})">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.656.843 5.12 2.26 7.15L.626 24l5.01-1.61c1.983 1.25 4.27 1.91 6.395 1.91 6.646 0 12.03-5.385 12.03-12.031S18.677 0 12.031 0zm6.544 17.202c-.273.766-1.58 1.464-2.185 1.503-.56.035-1.28.23-4.085-.86-3.39-1.32-5.59-4.78-5.736-4.97-.145-.19-1.37-1.82-1.37-3.475 0-1.655.857-2.47 1.164-2.8.307-.33.67-.413.89-.413.22 0 .44 0 .633.01.205.01.482-.08.736.53.264.634.904 2.203.984 2.366.08.163.133.353.033.553-.1.2-.153.326-.307.506-.154.18-.32.38-.453.506-.153.153-.314.316-.134.626.18.31.8 1.32 1.71 2.13.176.157.363.31.558.45 1.05.76 1.83 1.05 2.13 1.18.3.13.474.11.652-.09.18-.205.766-.893.97-1.2.204-.307.41-.256.69-.153.28.103 1.77.836 2.074.99.304.153.506.23.582.356.076.126.076.73-.197 1.496z"/></svg>
+                            إرسال النتيجة عبر واتساب
+                        </button>
+                    </div>
+                </div>
+                <button class="btn back-btn" style="font-size:1.1rem; padding:15px 30px; margin-top: 18px;" onclick="returnToMenu()">العودة للقائمة الرئيسية</button>
+            </div>
+        `;
+    }
+
+    function sendResultToTeacher(score, total) {
+        const nameInput = document.getElementById('student-name-input');
+        const warning = document.getElementById('share-warning');
+        const name = nameInput.value.trim();
+        if (!name) {
+            warning.style.display = 'block';
+            nameInput.classList.add('shake');
+            nameInput.focus();
+            setTimeout(() => nameInput.classList.remove('shake'), 500);
+            return;
+        }
+        warning.style.display = 'none';
+        const gameTitle = currentGame ? currentGame.title : '';
+        const message =
+            `📚 نتيجة طالب - ${LESSON_NAME}\n` +
+            `👤 اسم الطالب: ${name}\n` +
+            `🎮 اللعبة: ${gameTitle}\n` +
+            `✅ النتيجة: ${score} من ${total}\n` +
+            `⭐ نسبة النجاح: ${Math.round((score/total)*100)}%`;
+        const url = `https://wa.me/201033151639?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+
+    function startGame(gameData) {
+        initAudio();
+        currentGame = gameData;
+        currentQuestions = shuffleArray([...gameData.questions]);
+        qIndex = 0;
+        wrongAnswers = []; // تصفير قائمة الأخطاء
+        
+        document.getElementById('home-screen').classList.add('hidden');
+        document.getElementById('main-header').classList.add('hidden');
+        document.getElementById('main-footer').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+        document.getElementById('game-title').innerText = gameData.title;
+        
+        renderNextState();
+    }
+
+    function renderNextState() {
+        if (qIndex >= currentQuestions.length) {
+            gameComplete();
+            return;
+        }
+
+        const gc = document.getElementById('game-container');
+        gc.innerHTML = '';
+        updateProgress();
+
+        if (currentGame.type === 'mcq') {
+            renderMCQ(gc);
+        } else if (currentGame.type === 'bubbles') {
+            renderBubbles(gc);
+        } else if (currentGame.type === 'shooting') {
+            renderShooting(gc);
+        } else if (currentGame.type === 'true_false') {
+            renderTrueFalse(gc);
+        } else if (currentGame.type === 'genius') {
+            renderGenius(gc);
+        }
+    }
+
+    // --- أنماط الألعاب ---
+
+    // 1. اختيارات (MCQ)
+    function renderMCQ(container) {
+        clearInterval(geniusTimerInterval); clearShoot();
+        const qData = currentQuestions[qIndex];
+        const correctText = qData.options[qData.ans];
+        const shuffledOptions = shuffleArray([...qData.options]);
+
+        const btnContainer = document.createElement('div');
+        btnContainer.className = 'options-grid';
+        
+        let isAnswered = false;
+
+        shuffledOptions.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.innerText = opt;
+            btn.onclick = () => {
+                if(isAnswered) return;
+                isAnswered = true;
+
+                if (opt === correctText) {
+                    btn.classList.add('btn-correct');
+                    showFeedback(true, () => { qIndex++; renderNextState(); });
+                } else {
+                    btn.classList.add('btn-wrong');
+                    wrongAnswers.push({ question: qData.q, correct: correctText, selected: opt });
+                    showFeedback(false, () => { qIndex++; renderNextState(); });
+                }
+            };
+            btnContainer.appendChild(btn);
+        });
+
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        qBox.innerText = qData.q;
+        
+        container.appendChild(qBox);
+        container.appendChild(btnContainer);
+    }
+
+    // 2. صح أم خطأ
+    function renderTrueFalse(container) {
+        clearInterval(geniusTimerInterval); clearShoot();
+        const qData = currentQuestions[qIndex];
+        const correctText = qData.options[qData.ans];
+
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        qBox.innerText = qData.q;
+        
+        const tfContainer = document.createElement('div');
+        tfContainer.className = 'tf-grid';
+        
+        let isAnswered = false;
+
+        // ترتيب ثابت (صح يميناً وخطأ يساراً)
+        const fixedOptions = ["صح", "خطأ"];
+
+        fixedOptions.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.style.flex = '1';
+            btn.style.minWidth = '200px';
+            btn.style.fontSize = '2rem';
+            btn.style.padding = '30px';
+            btn.style.justifyContent = 'center';
+            
+            if(opt === "صح") {
+                btn.style.background = "linear-gradient(to bottom, #10b981, #059669)";
+                btn.style.borderBottomColor = "#047857";
+            } else {
+                btn.style.background = "linear-gradient(to bottom, #ef4444, #dc2626)";
+                btn.style.borderBottomColor = "#b91c1c";
+            }
+
+            btn.innerText = opt;
+            
+            btn.onclick = () => {
+                if(isAnswered) return;
+                isAnswered = true;
+
+                if (opt === correctText) {
+                    btn.classList.add('btn-correct');
+                    showFeedback(true, () => { qIndex++; renderNextState(); });
+                } else {
+                    btn.classList.add('btn-wrong');
+                    wrongAnswers.push({ question: qData.q, correct: correctText, selected: opt });
+                    showFeedback(false, () => { qIndex++; renderNextState(); });
+                }
+            };
+            tfContainer.appendChild(btn);
+        });
+
+        container.appendChild(qBox);
+        container.appendChild(tfContainer);
+    }
+
+    // 5. تحدي العباقرة (سؤال بعدّاد زمني)
+    function renderGenius(container) {
+        clearInterval(animInterval); clearShoot(); clearInterval(geniusTimerInterval);
+        clearInterval(geniusTimerInterval);
+        const qData = currentQuestions[qIndex];
+        const correctText = qData.options[qData.ans];
+        const shuffledOptions = shuffleArray([...qData.options]);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'genius-wrap';
+
+        const badge = document.createElement('div');
+        badge.className = 'genius-badge';
+        badge.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3a6 6 0 0 0-6 6c0 1.887.454 2.921 1.5 4.5.5.75 1 1.5 1 2.5h7c0-1 .5-1.75 1-2.5C17.546 11.921 18 10.887 18 9a6 6 0 0 0-6-6z"></path></svg> تحدي العباقرة`;
+
+        const timerTrack = document.createElement('div');
+        timerTrack.className = 'genius-timer-track';
+        const timerBar = document.createElement('div');
+        timerBar.className = 'genius-timer-bar';
+        timerTrack.appendChild(timerBar);
+
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        qBox.style.background = 'rgba(255,255,255,0.95)';
+        qBox.innerText = qData.q;
+
+        const optContainer = document.createElement('div');
+        optContainer.className = 'genius-options';
+
+        let isAnswered = false;
+        const TOTAL_TIME = 12000; // 12 ثانية لكل سؤال
+        let startTime = Date.now();
+
+        function finishQuestion(isCorrect, selectedText) {
+            if (isAnswered) return;
+            isAnswered = true;
+            clearInterval(geniusTimerInterval);
+            if (!isCorrect) {
+                wrongAnswers.push({ question: qData.q, correct: correctText, selected: selectedText || "انتهى الوقت!" });
+            }
+            showFeedback(isCorrect, () => { qIndex++; renderNextState(); });
+        }
+
+        shuffledOptions.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.innerText = opt;
+            btn.onclick = () => {
+                if (isAnswered) return;
+                if (opt === correctText) {
+                    btn.classList.add('btn-correct');
+                    finishQuestion(true, opt);
+                } else {
+                    btn.classList.add('btn-wrong');
+                    finishQuestion(false, opt);
+                }
+            };
+            optContainer.appendChild(btn);
+        });
+
+        wrap.appendChild(badge);
+        wrap.appendChild(timerTrack);
+        container.appendChild(wrap);
+        container.appendChild(qBox);
+        container.appendChild(optContainer);
+
+        geniusTimerInterval = setInterval(() => {
+            if (isAnswered) { clearInterval(geniusTimerInterval); return; }
+            const elapsed = Date.now() - startTime;
+            const pct = Math.max(0, 100 - (elapsed / TOTAL_TIME) * 100);
+            timerBar.style.width = pct + '%';
+            if (elapsed >= TOTAL_TIME) {
+                clearInterval(geniusTimerInterval);
+                finishQuestion(false, null);
+            }
+        }, 80);
+    }
+
+    // 3. الفقاعات المتساقطة
+    function renderBubbles(container) {
+        clearInterval(animInterval); clearShoot(); clearInterval(geniusTimerInterval);
+        const qData = currentQuestions[qIndex];
+        const correctText = qData.options[qData.ans];
+        const shuffledOptions = shuffleArray([...qData.options]);
+
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        qBox.innerText = qData.q;
+        
+        const area = document.createElement('div');
+        area.className = 'bubbles-area';
+
+        let bubbles = [];
+        let isAnswered = false;
+
+        shuffledOptions.forEach((opt, index) => {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.innerHTML = `<span>${opt}</span>`;
+            
+            let leftPos = 2 + (index * 24); 
+            bubble.style.left = leftPos + '%';
+            
+            let topPos = -100 - (Math.random() * 80);
+            bubble.style.top = topPos + 'px';
+            
+            let speed = 0.95 + Math.random() * 0.65; 
+
+            bubble.onclick = () => {
+                if (isAnswered) return;
+                isAnswered = true;
+                clearInterval(animInterval); clearShoot(); clearInterval(geniusTimerInterval);
+                if (opt === correctText) {
+                    bubble.style.background = 'var(--success)';
+                    bubble.style.color = 'white';
+                    showFeedback(true, () => { qIndex++; renderNextState(); });
+                } else {
+                    bubble.style.background = 'var(--danger)';
+                    bubble.style.color = 'white';
+                    wrongAnswers.push({ question: qData.q, correct: correctText, selected: opt });
+                    showFeedback(false, () => { qIndex++; renderNextState(); });
+                }
+            };
+
+            area.appendChild(bubble);
+            bubbles.push({ el: bubble, top: topPos, speed: speed, isCorrect: opt === correctText, active: true });
+        });
+
+        container.appendChild(qBox);
+        container.appendChild(area);
+        
+        let hint = document.createElement('div');
+        hint.style.textAlign = 'center';
+        hint.style.marginTop = '15px';
+        hint.style.color = 'var(--primary)';
+        hint.style.fontWeight = 'bold';
+        hint.style.fontSize = '1.1rem';
+        hint.innerHTML = `💡 اضغط على الفقاعة التي تحمل الإجابة الصحيحة قبل أن تسقط!`;
+        container.appendChild(hint);
+
+        let areaHeight = 400;
+
+        animInterval = setInterval(() => {
+            if (isAnswered) return;
+            bubbles.forEach(b => {
+                if (!b.active) return;
+                b.top += b.speed;
+                b.el.style.top = b.top + 'px';
+                
+                b.el.style.transform = `translateX(${Math.sin(b.top / 20) * 5}px)`;
+
+                if (b.top > areaHeight) {
+                    b.active = false;
+                    b.el.style.display = 'none';
+                    if (b.isCorrect && !isAnswered) {
+                        isAnswered = true;
+                        clearInterval(animInterval); clearShoot(); clearInterval(geniusTimerInterval);
+                        wrongAnswers.push({ question: qData.q, correct: correctText, selected: "سقطت دون اختيار" });
+                        showFeedback(false, () => { qIndex++; renderNextState(); });
+                    }
+                }
+            });
+        }, 30);
+    }
+
+    // 4. التنشين
+    function renderShooting(container) {
+        clearInterval(animInterval); clearShoot(); clearInterval(geniusTimerInterval);
+        const qData = currentQuestions[qIndex];
+        const correctText = qData.options[qData.ans];
+        const shuffledOptions = shuffleArray([...qData.options]);
+
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        qBox.innerText = qData.q;
+        
+        const area = document.createElement('div');
+        area.className = 'shooting-area';
+
+        let isAnswered = false;
+
+        shuffledOptions.forEach((opt, index) => {
+            const bird = document.createElement('div');
+            bird.className = 'target-bird';
+            
+            bird.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg> <span>${opt}</span>`;
+            
+            let topPos = 15 + (index * 20); 
+            bird.style.top = topPos + '%';
+            
+            let pos = (index % 2 === 0) ? -200 : window.innerWidth;
+            let speed = (Math.random() * 2.5 + 1.5) * ((index % 2 === 0) ? 1 : -1);
+            
+            bird.style.left = pos + 'px';
+
+            bird.onclick = () => {
+                if(isAnswered) return;
+                isAnswered = true;
+
+                if (opt === correctText) {
+                    bird.style.background = 'var(--success)';
+                    bird.style.color = 'white';
+                    bird.style.borderColor = 'white';
+                    showFeedback(true, () => { qIndex++; renderNextState(); });
+                } else {
+                    bird.style.background = 'var(--danger)';
+                    bird.style.color = 'white';
+                    bird.style.borderColor = 'white';
+                    wrongAnswers.push({ question: qData.q, correct: correctText, selected: opt });
+                    showFeedback(false, () => { qIndex++; renderNextState(); });
+                }
+            };
+
+            area.appendChild(bird);
+
+            shootIntervals.push(setInterval(() => {
+                if (isAnswered) return;
+                pos += speed;
+                if (pos > window.innerWidth + 50) pos = -250;
+                if (pos < -250) pos = window.innerWidth + 50;
+                bird.style.left = pos + 'px';
+            }, 20));
+        });
+
+        container.appendChild(qBox);
+        container.appendChild(area);
+        
+        let hint = document.createElement('div');
+        hint.style.textAlign = 'center';
+        hint.style.marginTop = '15px';
+        hint.style.color = 'var(--primary)';
+        hint.style.fontWeight = 'bold';
+        hint.style.fontSize = '1.1rem';
+        hint.style.display = 'flex';
+        hint.style.alignItems = 'center';
+        hint.style.justifyContent = 'center';
+        hint.style.gap = '8px';
+        hint.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg> اضغط على الإجابة الصحيحة وهي تتحرك لاصطيادها!`;
+        container.appendChild(hint);
+    }
+
+    window.onload = initApp;
+</script>
+</body>
+</html>
